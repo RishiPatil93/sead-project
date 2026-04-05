@@ -2,13 +2,15 @@ import axios from 'axios';
 import { toast } from 'react-hot-toast';
 
 const api = axios.create({
-  baseURL: '/api',
+  // This line logs the URL to your console so we can see what Vite is actually seeing
+  baseURL: import.meta.env.VITE_API_URL || 'https://real-time-collaborative-ide.onrender.com/api',
   headers: {
     'Content-Type': 'application/json',
   },
   withCredentials: true,
 });
 
+console.log("Current API Base URL:", api.defaults.baseURL);
 // Request interceptor — attach JWT token
 api.interceptors.request.use(
   (config) => {
